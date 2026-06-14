@@ -1,78 +1,139 @@
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Q's FREE Addons</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 :root{--bg:#0a0a0a;--bg2:#111;--bg3:#1a1a1a;--border:#2a2a2a;--border2:#3a3a3a;--text:#f0f0f0;--muted:#888;--accent:#fff;--btn-bg:#1e1e1e}
-body{background:var(--bg);color:var(--text);font-family:var(--font-sans,system-ui),sans-serif;min-height:100vh}
-nav{position:sticky;top:0;z-index:100;background:rgba(10,10,10,0.92);backdrop-filter:blur(12px);border-bottom:0.5px solid var(--border);padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:56px}
-.nav-brand{font-size:15px;font-weight:500;letter-spacing:0.02em;color:var(--accent)}
-.nav-links{display:flex;gap:4px}
-.nav-link{background:none;border:none;color:var(--muted);font-size:13px;padding:6px 10px;border-radius:6px;cursor:pointer;transition:color .15s,background .15s;white-space:nowrap}
+body{background:var(--bg);color:var(--text);font-family:system-ui,sans-serif;min-height:100vh}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:100;background:rgba(10,10,10,0.95);backdrop-filter:blur(12px);border-bottom:0.5px solid var(--border);padding:0 1.25rem;height:56px;display:flex;align-items:center;justify-content:space-between}
+.nav-brand{font-size:15px;font-weight:500;letter-spacing:0.02em;color:var(--accent);white-space:nowrap}
+.nav-links-desktop{display:flex;gap:4px}
+.hamburger{display:none;background:none;border:none;color:var(--text);cursor:pointer;padding:6px;border-radius:6px}
+.hamburger svg{display:block}
+.mobile-menu{display:none;position:fixed;top:56px;left:0;right:0;background:rgba(10,10,10,0.98);backdrop-filter:blur(16px);border-bottom:0.5px solid var(--border);padding:.75rem 1rem;z-index:99;flex-direction:column;gap:4px}
+.mobile-menu.open{display:flex}
+.nav-link{background:none;border:none;color:var(--muted);font-size:13px;padding:6px 10px;border-radius:6px;cursor:pointer;transition:color .15s,background .15s;white-space:nowrap;text-align:left;width:100%}
 .nav-link:hover,.nav-link.active{color:var(--accent);background:var(--bg3)}
-section{padding:3.5rem 2rem;max-width:900px;margin:0 auto}
-h1{font-size:38px;font-weight:500;letter-spacing:-0.02em;line-height:1.1}
+.nav-links-desktop .nav-link{width:auto}
+
+/* SECTIONS */
+section{padding:3.5rem 1.5rem;max-width:900px;margin:0 auto}
+@media(min-width:640px){section{padding:3.5rem 2rem}}
+
+h1{font-size:clamp(28px,6vw,38px);font-weight:500;letter-spacing:-0.02em;line-height:1.1}
 .subtitle{color:var(--muted);font-size:15px;margin-top:.5rem}
+
 .discord-btn{display:inline-flex;align-items:center;gap:8px;margin-top:1.5rem;padding:10px 20px;background:#5865F2;color:#fff;border:none;border-radius:8px;font-size:14px;font-weight:500;cursor:pointer;text-decoration:none;transition:opacity .15s}
 .discord-btn:hover{opacity:.85}
+
+.hero-meta{display:flex;gap:1.5rem;margin-top:1.5rem;flex-wrap:wrap}
+.hero-stat{display:flex;flex-direction:column}
+.hero-stat-num{font-size:24px;font-weight:500}
+.hero-stat-label{font-size:12px;color:var(--muted)}
+
 .section-title{font-size:20px;font-weight:500;margin-bottom:1.5rem;padding-bottom:.75rem;border-bottom:0.5px solid var(--border)}
 .section-badge{display:inline-block;font-size:11px;font-weight:500;padding:2px 8px;border-radius:4px;background:var(--bg3);border:0.5px solid var(--border2);color:var(--muted);margin-left:8px;vertical-align:middle}
-.addons-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px}
+
+/* ADDON CARDS */
+.addons-grid{display:grid;grid-template-columns:1fr;gap:12px}
+@media(min-width:480px){.addons-grid{grid-template-columns:repeat(auto-fill,minmax(240px,1fr))}}
+
 .addon-card{background:var(--bg2);border:0.5px solid var(--border);border-radius:12px;padding:1.25rem;display:flex;flex-direction:column;gap:.75rem;transition:border-color .15s}
 .addon-card:hover{border-color:var(--border2)}
 .addon-card-header{display:flex;align-items:center;gap:10px}
 .addon-icon{width:42px;height:42px;border-radius:10px;background:var(--bg3);border:0.5px solid var(--border2);display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0}
-.addon-icon img, .tp-preview img{max-width:100%;max-height:100%;object-fit:contain;object-position:center;display:block}
+.addon-icon img{max-width:100%;max-height:100%;object-fit:contain;display:block}
 .addon-name{font-size:14px;font-weight:500;line-height:1.3}
-.addon-desc{font-size:12px;color:var(--muted);line-height:1.5}
+.addon-desc{font-size:13px;color:var(--muted);line-height:1.5}
 .addon-footer{display:flex;align-items:center;justify-content:space-between;margin-top:auto}
 .addon-version{font-size:11px;color:var(--muted)}
-.dl-btn{display:inline-flex;align-items:center;gap:5px;padding:6px 12px;background:var(--bg3);border:0.5px solid var(--border2);border-radius:6px;font-size:12px;font-weight:500;color:var(--text);cursor:pointer;transition:background .15s,border-color .15s;text-decoration:none}
+
+/* BUTTONS */
+.dl-btn{display:inline-flex;align-items:center;gap:5px;padding:8px 14px;background:var(--bg3);border:0.5px solid var(--border2);border-radius:6px;font-size:13px;font-weight:500;color:var(--text);cursor:pointer;transition:background .15s,border-color .15s;text-decoration:none;min-height:36px}
 .dl-btn:hover{background:#252525;border-color:#555}
-.dl-btn i{font-size:13px}
+
+/* TEXTURE PACK CARDS */
 .tp-card{background:var(--bg2);border:0.5px solid var(--border);border-radius:12px;padding:1.25rem;display:flex;align-items:center;gap:1rem;transition:border-color .15s}
 .tp-card:hover{border-color:var(--border2)}
 .tp-preview{width:56px;height:56px;border-radius:8px;background:var(--bg3);border:0.5px solid var(--border2);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:22px}
 .tp-info{flex:1;min-width:0}
 .tp-name{font-size:14px;font-weight:500}
 .tp-meta{font-size:11px;color:var(--muted);margin-top:2px}
+
 .divider{border:none;border-top:0.5px solid var(--border);margin:0}
-.review-form-card{background:var(--bg2);border:0.5px solid var(--border);border-radius:12px;padding:1.5rem}
+
+/* REVIEWS */
+.review-form-card{background:var(--bg2);border:0.5px solid var(--border);border-radius:12px;padding:1.25rem}
+@media(min-width:480px){.review-form-card{padding:1.5rem}}
+
 .form-row{display:flex;flex-direction:column;gap:.4rem;margin-bottom:1rem}
 .form-label{font-size:12px;font-weight:500;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
-.form-input{background:var(--bg3);border:0.5px solid var(--border2);border-radius:8px;padding:9px 12px;color:var(--text);font-size:14px;font-family:inherit;outline:none;transition:border-color .15s}
+.form-input{background:var(--bg3);border:0.5px solid var(--border2);border-radius:8px;padding:10px 12px;color:var(--text);font-size:15px;font-family:inherit;outline:none;transition:border-color .15s;width:100%;-webkit-appearance:none}
 .form-input:focus{border-color:#666}
 .form-textarea{resize:none;min-height:90px;line-height:1.5}
-.stars{display:flex;gap:4px;margin-top:.25rem}
-.star{font-size:22px;cursor:pointer;color:var(--border2);transition:color .1s;background:none;border:none;padding:0;line-height:1}
+
+.stars{display:flex;gap:6px;margin-top:.25rem}
+.star{font-size:28px;cursor:pointer;color:var(--border2);transition:color .1s;background:none;border:none;padding:4px;line-height:1;min-width:40px;min-height:40px;display:flex;align-items:center;justify-content:center;border-radius:6px}
 .star.active,.star.hover{color:#f5c518}
-.submit-btn{width:100%;padding:10px;background:#fff;color:#000;border:none;border-radius:8px;font-size:14px;font-weight:500;cursor:pointer;transition:opacity .15s;margin-top:.5rem}
+
+.submit-btn{width:100%;padding:12px;background:#fff;color:#000;border:none;border-radius:8px;font-size:15px;font-weight:500;cursor:pointer;transition:opacity .15s;margin-top:.5rem;min-height:44px}
 .submit-btn:hover{opacity:.88}
 .submit-btn:disabled{opacity:.4;cursor:not-allowed}
+
 .reviews-list{margin-top:2rem;display:flex;flex-direction:column;gap:12px}
 .review-item{background:var(--bg2);border:0.5px solid var(--border);border-radius:10px;padding:1rem 1.25rem}
-.review-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:.4rem}
+.review-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:.4rem;gap:.5rem;flex-wrap:wrap}
 .review-author{font-size:14px;font-weight:500}
-.review-stars{color:#f5c518;font-size:13px}
+.review-stars{color:#f5c518;font-size:13px;white-space:nowrap}
 .review-text{font-size:13px;color:var(--muted);line-height:1.6}
 .review-date{font-size:11px;color:#555;margin-top:.25rem}
+
 .notice{font-size:13px;color:var(--muted);margin-top:.75rem;padding:.75rem 1rem;background:var(--bg3);border-radius:8px;border:0.5px solid var(--border)}
 .success-msg{background:#0f1f0f;border:0.5px solid #2a5a2a;border-radius:8px;padding:.75rem 1rem;font-size:13px;color:#6fcf6f;margin-top:.75rem;display:none}
-.hero-meta{display:flex;gap:1.5rem;margin-top:1.5rem}
-.hero-stat{display:flex;flex-direction:column}
-.hero-stat-num{font-size:24px;font-weight:500}
-.hero-stat-label{font-size:12px;color:var(--muted)}
+
+footer{padding:2rem 1.5rem;text-align:center;font-size:12px;color:#444;border-top:0.5px solid var(--border);margin-top:1rem}
+
+/* Mobile nav show/hide */
+@media(max-width:639px){
+  .nav-links-desktop{display:none}
+  .hamburger{display:flex;align-items:center;justify-content:center}
+}
 </style>
+</head>
+<body>
 
 <nav>
   <span class="nav-brand">Q's FREE Addons</span>
-  <div class="nav-links">
-    <button class="nav-link active" data-target="home" onclick="scrollToSection(event, 'home')">Home</button>
-    <button class="nav-link" data-target="big-addons" onclick="scrollToSection(event, 'big-addons')">Big Addons</button>
-    <button class="nav-link" data-target="small-addons" onclick="scrollToSection(event, 'small-addons')">Small Addons</button>
-    <button class="nav-link" data-target="big-textures" onclick="scrollToSection(event, 'big-textures')">Big Packs</button>
-    <button class="nav-link" data-target="small-textures" onclick="scrollToSection(event, 'small-textures')">Small Packs</button>
-    <button class="nav-link" data-target="reviews" onclick="scrollToSection(event, 'reviews')">Reviews</button>
+  <div class="nav-links-desktop">
+    <button class="nav-link active" data-target="home" onclick="scrollToSection(event,'home')">Home</button>
+    <button class="nav-link" data-target="big-addons" onclick="scrollToSection(event,'big-addons')">Big Addons</button>
+    <button class="nav-link" data-target="small-addons" onclick="scrollToSection(event,'small-addons')">Small Addons</button>
+    <button class="nav-link" data-target="big-textures" onclick="scrollToSection(event,'big-textures')">Big Packs</button>
+    <button class="nav-link" data-target="small-textures" onclick="scrollToSection(event,'small-textures')">Small Packs</button>
+    <button class="nav-link" data-target="reviews" onclick="scrollToSection(event,'reviews')">Reviews</button>
   </div>
+  <button class="hamburger" id="hamburger-btn" aria-label="Open menu" onclick="toggleMenu()">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+      <line x1="3" y1="6" x2="21" y2="6"/>
+      <line x1="3" y1="12" x2="21" y2="12"/>
+      <line x1="3" y1="18" x2="21" y2="18"/>
+    </svg>
+  </button>
 </nav>
+
+<div class="mobile-menu" id="mobile-menu">
+  <button class="nav-link active" data-target="home" onclick="scrollToSection(event,'home');closeMenu()">Home</button>
+  <button class="nav-link" data-target="big-addons" onclick="scrollToSection(event,'big-addons');closeMenu()">Big Addons</button>
+  <button class="nav-link" data-target="small-addons" onclick="scrollToSection(event,'small-addons');closeMenu()">Small Addons</button>
+  <button class="nav-link" data-target="big-textures" onclick="scrollToSection(event,'big-textures');closeMenu()">Big Packs</button>
+  <button class="nav-link" data-target="small-textures" onclick="scrollToSection(event,'small-textures');closeMenu()">Small Packs</button>
+  <button class="nav-link" data-target="reviews" onclick="scrollToSection(event,'reviews');closeMenu()">Reviews</button>
+</div>
 
 <section id="home" style="padding-top:5rem">
   <h1>Q's FREE<br>Addons</h1>
@@ -101,11 +162,9 @@ h1{font-size:38px;font-weight:500;letter-spacing:-0.02em;line-height:1.1}
       <div class="addon-desc">A complete auction house system for trading, bid management, and market tracking in-game.</div>
       <div class="addon-footer">
         <span class="addon-version">v1.0</span>
-        <button class="dl-btn" type="button"
-        onclick="downloadFiles(['Quides AH RP.mcpack', 'Quides AH BP.mcaddon'])">
-    <i class="ti ti-download" aria-hidden="true"></i>
-    Download
-</button>
+        <button class="dl-btn" type="button" onclick="downloadFiles(['Quides AH RP.mcpack','Quides AH BP.mcaddon'])">
+          ↓ Download
+        </button>
       </div>
     </div>
   </div>
@@ -140,7 +199,7 @@ h1{font-size:38px;font-weight:500;letter-spacing:-0.02em;line-height:1.1}
     <div style="font-size:14px;font-weight:500;margin-bottom:1rem">Leave a review</div>
     <div class="form-row">
       <label class="form-label">Your name</label>
-      <input class="form-input" id="r-name" type="text" placeholder="Enter your name" maxlength="40">
+      <input class="form-input" id="r-name" type="text" placeholder="Enter your name" maxlength="40" autocomplete="off">
     </div>
     <div class="form-row">
       <label class="form-label">Rating</label>
@@ -157,39 +216,38 @@ h1{font-size:38px;font-weight:500;letter-spacing:-0.02em;line-height:1.1}
       <textarea class="form-input form-textarea" id="r-text" placeholder="Share your thoughts..." maxlength="500"></textarea>
     </div>
     <button class="submit-btn" id="submit-btn" onclick="submitReview()">Post Review</button>
-    <div class="success-msg" id="success-msg"><i class="ti ti-circle-check" aria-hidden="true"></i> Your review has been posted. Thanks!</div>
+    <div class="success-msg" id="success-msg">✓ Your review has been posted. Thanks!</div>
     <div class="notice" id="already-msg" style="display:none">You have already left a review. Only one review per person is allowed.</div>
   </div>
   <div class="reviews-list" id="reviews-list"></div>
 </section>
 
-<div style="padding:2rem;text-align:center;font-size:12px;color:#444;border-top:0.5px solid var(--border);margin-top:1rem">
-  Q's FREE Addons — All content is free forever
-</div>
+<footer>Q's FREE Addons — All content is free forever</footer>
 
 <script>
 let selectedStar = 0;
+let menuOpen = false;
 
-function scrollTo(e, id) {
-  document.getElementById(id).scrollIntoView({behavior:'smooth'});
-  document.querySelectorAll('.nav-link').forEach(el => el.classList.remove('active'));
-  e.currentTarget.classList.add('active');
+function toggleMenu() {
+  menuOpen = !menuOpen;
+  document.getElementById('mobile-menu').classList.toggle('open', menuOpen);
+}
+function closeMenu() {
+  menuOpen = false;
+  document.getElementById('mobile-menu').classList.remove('open');
 }
 
 function setStar(v) {
   selectedStar = v;
   document.querySelectorAll('.star').forEach(s => {
-    const sv = parseInt(s.dataset.v);
-    s.classList.toggle('active', sv <= v);
+    s.classList.toggle('active', parseInt(s.dataset.v) <= v);
   });
 }
 
 document.querySelectorAll('.star').forEach(s => {
   s.addEventListener('mouseenter', () => {
     const hv = parseInt(s.dataset.v);
-    document.querySelectorAll('.star').forEach(x => {
-      x.classList.toggle('hover', parseInt(x.dataset.v) <= hv);
-    });
+    document.querySelectorAll('.star').forEach(x => x.classList.toggle('hover', parseInt(x.dataset.v) <= hv));
   });
   s.addEventListener('mouseleave', () => {
     document.querySelectorAll('.star').forEach(x => x.classList.remove('hover'));
@@ -221,16 +279,14 @@ function scrollToSection(e, id) {
   updateActiveNav(id);
 }
 
-const sectionIds = ['home', 'big-addons', 'small-addons', 'big-textures', 'small-textures', 'reviews'];
+const sectionIds = ['home','big-addons','small-addons','big-textures','small-textures','reviews'];
 
 function onScrollUpdateActive() {
   const offset = window.innerHeight * 0.22;
   let current = 'home';
   sectionIds.forEach(id => {
     const el = document.getElementById(id);
-    if (el && el.getBoundingClientRect().top <= offset) {
-      current = id;
-    }
+    if (el && el.getBoundingClientRect().top <= offset) current = id;
   });
   updateActiveNav(current);
 }
@@ -238,17 +294,23 @@ function onScrollUpdateActive() {
 window.addEventListener('scroll', onScrollUpdateActive);
 window.addEventListener('load', onScrollUpdateActive);
 
-function getStoredKey(name) {
-  return 'q_reviewed_' + name.trim().toLowerCase().replace(/\s+/g, '_');
-}
+document.addEventListener('click', e => {
+  if (menuOpen && !e.target.closest('#mobile-menu') && !e.target.closest('#hamburger-btn')) closeMenu();
+});
 
+function getStoredKey(name) {
+  return 'q_reviewed_' + name.trim().toLowerCase().replace(/\s+/g,'_');
+}
 function loadReviews() {
   const raw = localStorage.getItem('q_reviews');
   return raw ? JSON.parse(raw) : [];
 }
-
 function saveReviews(arr) {
   localStorage.setItem('q_reviews', JSON.stringify(arr));
+}
+
+function esc(s) {
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
 
 function renderReviews() {
@@ -263,7 +325,7 @@ function renderReviews() {
     <div class="review-item">
       <div class="review-header">
         <span class="review-author">${esc(r.name)}</span>
-        <span class="review-stars">${'★'.repeat(r.stars)}${'☆'.repeat(5 - r.stars)}</span>
+        <span class="review-stars">${'★'.repeat(r.stars)}${'☆'.repeat(5-r.stars)}</span>
       </div>
       <div class="review-text">${esc(r.text)}</div>
       <div class="review-date">${r.date}</div>
@@ -271,47 +333,30 @@ function renderReviews() {
   `).join('');
 }
 
-function esc(s) {
-  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-}
-
 function submitReview() {
   const name = document.getElementById('r-name').value.trim();
   const text = document.getElementById('r-text').value.trim();
   const succ = document.getElementById('success-msg');
   const already = document.getElementById('already-msg');
-  const btn = document.getElementById('submit-btn');
-
   succ.style.display = 'none';
   already.style.display = 'none';
-
   if (!name) { document.getElementById('r-name').focus(); return; }
-  if (!selectedStar) { return; }
+  if (!selectedStar) return;
   if (!text) { document.getElementById('r-text').focus(); return; }
-
   const key = getStoredKey(name);
-  if (localStorage.getItem(key)) {
-    already.style.display = 'block';
-    return;
-  }
-
+  if (localStorage.getItem(key)) { already.style.display = 'block'; return; }
   const reviews = loadReviews();
-  reviews.push({
-    name,
-    stars: selectedStar,
-    text,
-    date: new Date().toLocaleDateString('en-US', {year:'numeric',month:'short',day:'numeric'})
-  });
+  reviews.push({name, stars: selectedStar, text, date: new Date().toLocaleDateString('en-US',{year:'numeric',month:'short',day:'numeric'})});
   saveReviews(reviews);
-  localStorage.setItem(key, '1');
-
+  localStorage.setItem(key,'1');
   document.getElementById('r-name').value = '';
   document.getElementById('r-text').value = '';
-  setStar(0);
-  selectedStar = 0;
+  setStar(0); selectedStar = 0;
   succ.style.display = 'block';
   renderReviews();
 }
 
 renderReviews();
 </script>
+</body>
+</html>
