@@ -231,14 +231,11 @@ const firebaseConfig = {
   measurementId: "G-5Y8SB4HEQ3"
 };
 
+const ADMIN_PASSWORD = "strongman6908";
 
-// ── Admin password — change this to whatever you want ───────────
-const ADMIN_PASSWORD = "changeme123";
+const COOLDOWN_MS = 60 * 60 * 1000;
 
-// ── Cooldown duration ───────────────────────────────────────────
-const COOLDOWN_MS = 60 * 60 * 1000; // 1 hour
-
-const IS_CONFIGURED = firebaseConfig.apiKey !== "PASTE_YOUR_API_KEY_HERE";
+const IS_CONFIGURED = firebaseConfig.apiKey !== "AIzaSyAe97iOIwvPSXq3tZqXDNPJCdP5cxuwORo";
 let reviewsRef = null;
 
 if (!IS_CONFIGURED) {
