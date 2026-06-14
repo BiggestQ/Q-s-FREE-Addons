@@ -6,43 +6,37 @@
 <title>Q's FREE Addons</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-:root{--bg:#0a0a0a;--bg2:#111;--bg3:#1a1a1a;--border:#2a2a2a;--border2:#3a3a3a;--text:#f0f0f0;--muted:#888;--accent:#fff;--btn-bg:#1e1e1e}
+:root{--bg:#0a0a0a;--bg2:#111;--bg3:#1a1a1a;--border:#2a2a2a;--border2:#3a3a3a;--text:#f0f0f0;--muted:#888;--accent:#fff}
 body{background:var(--bg);color:var(--text);font-family:system-ui,sans-serif;min-height:100vh}
 
-/* NAV */
+/* SETUP BANNER */
+#setup-banner{background:#1a1200;border-bottom:1px solid #6b4f00;padding:.75rem 1.5rem;font-size:13px;color:#f5c518;display:none;line-height:1.6}
+#setup-banner strong{color:#ffe066}
+#setup-banner code{background:#2a2000;padding:1px 5px;border-radius:4px;font-family:monospace;font-size:12px}
+
 nav{position:sticky;top:0;z-index:100;background:rgba(10,10,10,0.95);backdrop-filter:blur(12px);border-bottom:0.5px solid var(--border);padding:0 1.25rem;height:56px;display:flex;align-items:center;justify-content:space-between}
 .nav-brand{font-size:15px;font-weight:500;letter-spacing:0.02em;color:var(--accent);white-space:nowrap}
 .nav-links-desktop{display:flex;gap:4px}
 .hamburger{display:none;background:none;border:none;color:var(--text);cursor:pointer;padding:6px;border-radius:6px}
-.hamburger svg{display:block}
 .mobile-menu{display:none;position:fixed;top:56px;left:0;right:0;background:rgba(10,10,10,0.98);backdrop-filter:blur(16px);border-bottom:0.5px solid var(--border);padding:.75rem 1rem;z-index:99;flex-direction:column;gap:4px}
 .mobile-menu.open{display:flex}
 .nav-link{background:none;border:none;color:var(--muted);font-size:13px;padding:6px 10px;border-radius:6px;cursor:pointer;transition:color .15s,background .15s;white-space:nowrap;text-align:left;width:100%}
 .nav-link:hover,.nav-link.active{color:var(--accent);background:var(--bg3)}
 .nav-links-desktop .nav-link{width:auto}
 
-/* SECTIONS */
 section{padding:3.5rem 1.5rem;max-width:900px;margin:0 auto}
 @media(min-width:640px){section{padding:3.5rem 2rem}}
-
 h1{font-size:clamp(28px,6vw,38px);font-weight:500;letter-spacing:-0.02em;line-height:1.1}
 .subtitle{color:var(--muted);font-size:15px;margin-top:.5rem}
-
 .discord-btn{display:inline-flex;align-items:center;gap:8px;margin-top:1.5rem;padding:10px 20px;background:#5865F2;color:#fff;border:none;border-radius:8px;font-size:14px;font-weight:500;cursor:pointer;text-decoration:none;transition:opacity .15s}
 .discord-btn:hover{opacity:.85}
-
 .hero-meta{display:flex;gap:1.5rem;margin-top:1.5rem;flex-wrap:wrap}
-.hero-stat{display:flex;flex-direction:column}
 .hero-stat-num{font-size:24px;font-weight:500}
 .hero-stat-label{font-size:12px;color:var(--muted)}
-
 .section-title{font-size:20px;font-weight:500;margin-bottom:1.5rem;padding-bottom:.75rem;border-bottom:0.5px solid var(--border)}
 .section-badge{display:inline-block;font-size:11px;font-weight:500;padding:2px 8px;border-radius:4px;background:var(--bg3);border:0.5px solid var(--border2);color:var(--muted);margin-left:8px;vertical-align:middle}
-
-/* ADDON CARDS */
 .addons-grid{display:grid;grid-template-columns:1fr;gap:12px}
 @media(min-width:480px){.addons-grid{grid-template-columns:repeat(auto-fill,minmax(240px,1fr))}}
-
 .addon-card{background:var(--bg2);border:0.5px solid var(--border);border-radius:12px;padding:1.25rem;display:flex;flex-direction:column;gap:.75rem;transition:border-color .15s}
 .addon-card:hover{border-color:var(--border2)}
 .addon-card-header{display:flex;align-items:center;gap:10px}
@@ -52,39 +46,22 @@ h1{font-size:clamp(28px,6vw,38px);font-weight:500;letter-spacing:-0.02em;line-he
 .addon-desc{font-size:13px;color:var(--muted);line-height:1.5}
 .addon-footer{display:flex;align-items:center;justify-content:space-between;margin-top:auto}
 .addon-version{font-size:11px;color:var(--muted)}
-
-/* BUTTONS */
 .dl-btn{display:inline-flex;align-items:center;gap:5px;padding:8px 14px;background:var(--bg3);border:0.5px solid var(--border2);border-radius:6px;font-size:13px;font-weight:500;color:var(--text);cursor:pointer;transition:background .15s,border-color .15s;text-decoration:none;min-height:36px}
 .dl-btn:hover{background:#252525;border-color:#555}
-
-/* TEXTURE PACK CARDS */
-.tp-card{background:var(--bg2);border:0.5px solid var(--border);border-radius:12px;padding:1.25rem;display:flex;align-items:center;gap:1rem;transition:border-color .15s}
-.tp-card:hover{border-color:var(--border2)}
-.tp-preview{width:56px;height:56px;border-radius:8px;background:var(--bg3);border:0.5px solid var(--border2);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:22px}
-.tp-info{flex:1;min-width:0}
-.tp-name{font-size:14px;font-weight:500}
-.tp-meta{font-size:11px;color:var(--muted);margin-top:2px}
-
 .divider{border:none;border-top:0.5px solid var(--border);margin:0}
-
-/* REVIEWS */
 .review-form-card{background:var(--bg2);border:0.5px solid var(--border);border-radius:12px;padding:1.25rem}
 @media(min-width:480px){.review-form-card{padding:1.5rem}}
-
 .form-row{display:flex;flex-direction:column;gap:.4rem;margin-bottom:1rem}
 .form-label{font-size:12px;font-weight:500;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
 .form-input{background:var(--bg3);border:0.5px solid var(--border2);border-radius:8px;padding:10px 12px;color:var(--text);font-size:15px;font-family:inherit;outline:none;transition:border-color .15s;width:100%;-webkit-appearance:none}
 .form-input:focus{border-color:#666}
 .form-textarea{resize:none;min-height:90px;line-height:1.5}
-
-.stars{display:flex;gap:6px;margin-top:.25rem}
+.stars{display:flex;gap:4px;margin-top:.25rem}
 .star{font-size:28px;cursor:pointer;color:var(--border2);transition:color .1s;background:none;border:none;padding:4px;line-height:1;min-width:40px;min-height:40px;display:flex;align-items:center;justify-content:center;border-radius:6px}
 .star.active,.star.hover{color:#f5c518}
-
 .submit-btn{width:100%;padding:12px;background:#fff;color:#000;border:none;border-radius:8px;font-size:15px;font-weight:500;cursor:pointer;transition:opacity .15s;margin-top:.5rem;min-height:44px}
 .submit-btn:hover{opacity:.88}
 .submit-btn:disabled{opacity:.4;cursor:not-allowed}
-
 .reviews-list{margin-top:2rem;display:flex;flex-direction:column;gap:12px}
 .review-item{background:var(--bg2);border:0.5px solid var(--border);border-radius:10px;padding:1rem 1.25rem}
 .review-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:.4rem;gap:.5rem;flex-wrap:wrap}
@@ -92,20 +69,21 @@ h1{font-size:clamp(28px,6vw,38px);font-weight:500;letter-spacing:-0.02em;line-he
 .review-stars{color:#f5c518;font-size:13px;white-space:nowrap}
 .review-text{font-size:13px;color:var(--muted);line-height:1.6}
 .review-date{font-size:11px;color:#555;margin-top:.25rem}
-
 .notice{font-size:13px;color:var(--muted);margin-top:.75rem;padding:.75rem 1rem;background:var(--bg3);border-radius:8px;border:0.5px solid var(--border)}
 .success-msg{background:#0f1f0f;border:0.5px solid #2a5a2a;border-radius:8px;padding:.75rem 1rem;font-size:13px;color:#6fcf6f;margin-top:.75rem;display:none}
-
+.loading-msg{font-size:13px;color:#555;padding:.5rem 0}
 footer{padding:2rem 1.5rem;text-align:center;font-size:12px;color:#444;border-top:0.5px solid var(--border);margin-top:1rem}
-
-/* Mobile nav show/hide */
-@media(max-width:639px){
-  .nav-links-desktop{display:none}
-  .hamburger{display:flex;align-items:center;justify-content:center}
-}
+@media(max-width:639px){.nav-links-desktop{display:none}.hamburger{display:flex;align-items:center;justify-content:center}}
 </style>
 </head>
 <body>
+
+<div id="setup-banner">
+  ⚠️ <strong>Firebase not configured yet.</strong>
+  Reviews won't save until you open the HTML file and replace the placeholder values inside
+  <code>firebaseConfig</code> with your own Firebase project details.
+  See the comments in the &lt;script&gt; at the bottom of the file for instructions.
+</div>
 
 <nav>
   <span class="nav-brand">Q's FREE Addons</span>
@@ -119,9 +97,7 @@ footer{padding:2rem 1.5rem;text-align:center;font-size:12px;color:#444;border-to
   </div>
   <button class="hamburger" id="hamburger-btn" aria-label="Open menu" onclick="toggleMenu()">
     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-      <line x1="3" y1="6" x2="21" y2="6"/>
-      <line x1="3" y1="12" x2="21" y2="12"/>
-      <line x1="3" y1="18" x2="21" y2="18"/>
+      <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
     </svg>
   </button>
 </nav>
@@ -150,7 +126,6 @@ footer{padding:2rem 1.5rem;text-align:center;font-size:12px;color:#444;border-to
 </section>
 
 <hr class="divider">
-
 <section id="big-addons">
   <div class="section-title">Big Addons <span class="section-badge">1 pack</span></div>
   <div class="addons-grid">
@@ -162,37 +137,31 @@ footer{padding:2rem 1.5rem;text-align:center;font-size:12px;color:#444;border-to
       <div class="addon-desc">A complete auction house system for trading, bid management, and market tracking in-game.</div>
       <div class="addon-footer">
         <span class="addon-version">v1.0</span>
-        <button class="dl-btn" type="button" onclick="downloadFiles(['Quides AH RP.mcpack','Quides AH BP.mcaddon'])">
-          ↓ Download
-        </button>
+        <button class="dl-btn" type="button" onclick="downloadFiles(['Quides AH RP.mcpack','Quides AH BP.mcaddon'])">↓ Download</button>
       </div>
     </div>
   </div>
 </section>
 
 <hr class="divider">
-
 <section id="small-addons">
   <div class="section-title">Small Addons <span class="section-badge">0 packs</span></div>
   <div class="addons-grid"></div>
 </section>
 
 <hr class="divider">
-
 <section id="big-textures">
   <div class="section-title">Big Texture Packs <span class="section-badge">0 packs</span></div>
   <div style="display:flex;flex-direction:column;gap:10px"></div>
 </section>
 
 <hr class="divider">
-
 <section id="small-textures">
   <div class="section-title">Small Texture Packs <span class="section-badge">0 packs</span></div>
   <div style="display:flex;flex-direction:column;gap:10px"></div>
 </section>
 
 <hr class="divider">
-
 <section id="reviews">
   <div class="section-title">Reviews</div>
   <div class="review-form-card">
@@ -219,12 +188,69 @@ footer{padding:2rem 1.5rem;text-align:center;font-size:12px;color:#444;border-to
     <div class="success-msg" id="success-msg">✓ Your review has been posted. Thanks!</div>
     <div class="notice" id="already-msg" style="display:none">You have already left a review. Only one review per person is allowed.</div>
   </div>
-  <div class="reviews-list" id="reviews-list"></div>
+  <div class="reviews-list" id="reviews-list">
+    <div class="loading-msg">Loading reviews...</div>
+  </div>
 </section>
 
 <footer>Q's FREE Addons — All content is free forever</footer>
 
+<!-- Firebase SDKs -->
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-database-compat.js"></script>
+
 <script>
+// ================================================================
+// FIREBASE SETUP — follow these steps (it's free, takes ~5 mins):
+//
+// 1. Go to https://console.firebase.google.com
+// 2. Click "Add project" → give it any name → Continue
+// 3. Disable Google Analytics if you want → Create project
+// 4. Click "Realtime Database" in the left sidebar → Create database
+//    → Start in TEST MODE → Enable
+// 5. Click the gear icon ⚙ → Project settings → scroll down to
+//    "Your apps" → click </> (Web) → register app → copy the config
+// 6. Paste the values below, replacing each placeholder
+// ================================================================
+const firebaseConfig = {
+  apiKey:            "PASTE_YOUR_API_KEY_HERE",
+  authDomain:        "PASTE_YOUR_PROJECT_ID.firebaseapp.com",
+  databaseURL:       "https://PASTE_YOUR_PROJECT_ID-default-rtdb.firebaseio.com/",
+  projectId:         "PASTE_YOUR_PROJECT_ID",
+  storageBucket:     "PASTE_YOUR_PROJECT_ID.appspot.com",
+  messagingSenderId: "PASTE_YOUR_SENDER_ID",
+  appId:             "PASTE_YOUR_APP_ID"
+};
+// ================================================================
+
+const IS_CONFIGURED = firebaseConfig.apiKey !== "PASTE_YOUR_API_KEY_HERE";
+
+if (!IS_CONFIGURED) {
+  document.getElementById('setup-banner').style.display = 'block';
+  document.getElementById('reviews-list').innerHTML =
+    '<div class="loading-msg">Firebase not set up yet — reviews are disabled.</div>';
+} else {
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.database();
+  const reviewsRef = db.ref('reviews');
+
+  // Real-time listener — updates on ALL devices instantly
+  reviewsRef.orderByChild('timestamp').on('value', (snapshot) => {
+    const data = snapshot.val();
+    const reviews = data ? Object.values(data).reverse() : [];
+    renderReviews(reviews);
+  });
+
+  window._submitToFirebase = function(name, stars, text) {
+    reviewsRef.push({
+      name, stars, text,
+      date: new Date().toLocaleDateString('en-US',{year:'numeric',month:'short',day:'numeric'}),
+      timestamp: Date.now()
+    });
+  };
+}
+
+// ── UI helpers ──────────────────────────────────────────────────
 let selectedStar = 0;
 let menuOpen = false;
 
@@ -260,6 +286,14 @@ function updateActiveNav(target) {
   });
 }
 
+function scrollToSection(e, id) {
+  e.preventDefault();
+  const section = document.getElementById(id);
+  if (!section) return;
+  section.scrollIntoView({behavior:'smooth', block:'start'});
+  updateActiveNav(id);
+}
+
 function downloadFiles(urls) {
   urls.forEach(url => {
     const a = document.createElement('a');
@@ -269,14 +303,6 @@ function downloadFiles(urls) {
     a.click();
     document.body.removeChild(a);
   });
-}
-
-function scrollToSection(e, id) {
-  e.preventDefault();
-  const section = document.getElementById(id);
-  if (!section) return;
-  section.scrollIntoView({behavior:'smooth', block:'start'});
-  updateActiveNav(id);
 }
 
 const sectionIds = ['home','big-addons','small-addons','big-textures','small-textures','reviews'];
@@ -298,42 +324,36 @@ document.addEventListener('click', e => {
   if (menuOpen && !e.target.closest('#mobile-menu') && !e.target.closest('#hamburger-btn')) closeMenu();
 });
 
-function getStoredKey(name) {
-  return 'q_reviewed_' + name.trim().toLowerCase().replace(/\s+/g,'_');
-}
-function loadReviews() {
-  const raw = localStorage.getItem('q_reviews');
-  return raw ? JSON.parse(raw) : [];
-}
-function saveReviews(arr) {
-  localStorage.setItem('q_reviews', JSON.stringify(arr));
-}
-
+// ── Reviews ─────────────────────────────────────────────────────
 function esc(s) {
-  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
 
-function renderReviews() {
+function renderReviews(reviews) {
   const list = document.getElementById('reviews-list');
-  const reviews = loadReviews();
   document.getElementById('stat-reviews').textContent = reviews.length;
   if (!reviews.length) {
-    list.innerHTML = '<div style="font-size:13px;color:#555;padding:.5rem 0">No reviews yet. Be the first!</div>';
+    list.innerHTML = '<div class="loading-msg">No reviews yet. Be the first!</div>';
     return;
   }
-  list.innerHTML = reviews.slice().reverse().map(r => `
+  list.innerHTML = reviews.map(r => `
     <div class="review-item">
       <div class="review-header">
         <span class="review-author">${esc(r.name)}</span>
-        <span class="review-stars">${'★'.repeat(r.stars)}${'☆'.repeat(5-r.stars)}</span>
+        <span class="review-stars">${'★'.repeat(r.stars)}${'☆'.repeat(5 - r.stars)}</span>
       </div>
       <div class="review-text">${esc(r.text)}</div>
-      <div class="review-date">${r.date}</div>
+      <div class="review-date">${esc(r.date)}</div>
     </div>
   `).join('');
 }
 
+function getStoredKey(name) {
+  return 'q_reviewed_' + name.trim().toLowerCase().replace(/\s+/g,'_');
+}
+
 function submitReview() {
+  if (!IS_CONFIGURED) return;
   const name = document.getElementById('r-name').value.trim();
   const text = document.getElementById('r-text').value.trim();
   const succ = document.getElementById('success-msg');
@@ -345,18 +365,13 @@ function submitReview() {
   if (!text) { document.getElementById('r-text').focus(); return; }
   const key = getStoredKey(name);
   if (localStorage.getItem(key)) { already.style.display = 'block'; return; }
-  const reviews = loadReviews();
-  reviews.push({name, stars: selectedStar, text, date: new Date().toLocaleDateString('en-US',{year:'numeric',month:'short',day:'numeric'})});
-  saveReviews(reviews);
-  localStorage.setItem(key,'1');
+  window._submitToFirebase(name, selectedStar, text);
+  localStorage.setItem(key, '1');
   document.getElementById('r-name').value = '';
   document.getElementById('r-text').value = '';
   setStar(0); selectedStar = 0;
   succ.style.display = 'block';
-  renderReviews();
 }
-
-renderReviews();
 </script>
 </body>
 </html>
