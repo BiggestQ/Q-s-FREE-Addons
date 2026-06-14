@@ -8,12 +8,9 @@
 *{box-sizing:border-box;margin:0;padding:0}
 :root{--bg:#0a0a0a;--bg2:#111;--bg3:#1a1a1a;--border:#2a2a2a;--border2:#3a3a3a;--text:#f0f0f0;--muted:#888;--accent:#fff}
 body{background:var(--bg);color:var(--text);font-family:system-ui,sans-serif;min-height:100vh}
-
-/* SETUP BANNER */
 #setup-banner{background:#1a1200;border-bottom:1px solid #6b4f00;padding:.75rem 1.5rem;font-size:13px;color:#f5c518;display:none;line-height:1.6}
 #setup-banner strong{color:#ffe066}
 #setup-banner code{background:#2a2000;padding:1px 5px;border-radius:4px;font-family:monospace;font-size:12px}
-
 nav{position:sticky;top:0;z-index:100;background:rgba(10,10,10,0.95);backdrop-filter:blur(12px);border-bottom:0.5px solid var(--border);padding:0 1.25rem;height:56px;display:flex;align-items:center;justify-content:space-between}
 .nav-brand{font-size:15px;font-weight:500;letter-spacing:0.02em;color:var(--accent);white-space:nowrap}
 .nav-links-desktop{display:flex;gap:4px}
@@ -23,7 +20,6 @@ nav{position:sticky;top:0;z-index:100;background:rgba(10,10,10,0.95);backdrop-fi
 .nav-link{background:none;border:none;color:var(--muted);font-size:13px;padding:6px 10px;border-radius:6px;cursor:pointer;transition:color .15s,background .15s;white-space:nowrap;text-align:left;width:100%}
 .nav-link:hover,.nav-link.active{color:var(--accent);background:var(--bg3)}
 .nav-links-desktop .nav-link{width:auto}
-
 section{padding:3.5rem 1.5rem;max-width:900px;margin:0 auto}
 @media(min-width:640px){section{padding:3.5rem 2rem}}
 h1{font-size:clamp(28px,6vw,38px);font-weight:500;letter-spacing:-0.02em;line-height:1.1}
@@ -63,7 +59,7 @@ h1{font-size:clamp(28px,6vw,38px);font-weight:500;letter-spacing:-0.02em;line-he
 .submit-btn:hover{opacity:.88}
 .submit-btn:disabled{opacity:.4;cursor:not-allowed}
 .reviews-list{margin-top:2rem;display:flex;flex-direction:column;gap:12px}
-.review-item{background:var(--bg2);border:0.5px solid var(--border);border-radius:10px;padding:1rem 1.25rem}
+.review-item{background:var(--bg2);border:0.5px solid var(--border);border-radius:10px;padding:1rem 1.25rem;position:relative}
 .review-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:.4rem;gap:.5rem;flex-wrap:wrap}
 .review-author{font-size:14px;font-weight:500}
 .review-stars{color:#f5c518;font-size:13px;white-space:nowrap}
@@ -71,8 +67,26 @@ h1{font-size:clamp(28px,6vw,38px);font-weight:500;letter-spacing:-0.02em;line-he
 .review-date{font-size:11px;color:#555;margin-top:.25rem}
 .notice{font-size:13px;color:var(--muted);margin-top:.75rem;padding:.75rem 1rem;background:var(--bg3);border-radius:8px;border:0.5px solid var(--border)}
 .success-msg{background:#0f1f0f;border:0.5px solid #2a5a2a;border-radius:8px;padding:.75rem 1rem;font-size:13px;color:#6fcf6f;margin-top:.75rem;display:none}
+.cooldown-msg{background:#1a1200;border:0.5px solid #6b4f00;border-radius:8px;padding:.75rem 1rem;font-size:13px;color:#f5c518;margin-top:.75rem;display:none}
 .loading-msg{font-size:13px;color:#555;padding:.5rem 0}
-footer{padding:2rem 1.5rem;text-align:center;font-size:12px;color:#444;border-top:0.5px solid var(--border);margin-top:1rem}
+
+/* Admin delete button — only visible in admin mode */
+.delete-btn{display:none;position:absolute;top:.75rem;right:.75rem;background:none;border:0.5px solid #3a2020;border-radius:6px;color:#884444;font-size:12px;padding:3px 8px;cursor:pointer;transition:background .15s,color .15s}
+.delete-btn:hover{background:#2a1010;color:#ff6666;border-color:#553333}
+body.admin-mode .delete-btn{display:block}
+
+/* Admin unlock bar */
+#admin-bar{display:none;position:fixed;bottom:0;left:0;right:0;background:#111;border-top:0.5px solid #333;padding:.6rem 1.25rem;z-index:200;align-items:center;gap:.75rem}
+#admin-bar.open{display:flex}
+#admin-pw{flex:1;background:var(--bg3);border:0.5px solid var(--border2);border-radius:6px;padding:7px 10px;color:var(--text);font-size:14px;font-family:inherit;outline:none;max-width:280px}
+#admin-pw:focus{border-color:#666}
+#admin-pw-btn{padding:7px 14px;background:var(--bg3);border:0.5px solid var(--border2);border-radius:6px;color:var(--text);font-size:13px;cursor:pointer;white-space:nowrap}
+#admin-pw-btn:hover{background:#252525}
+#admin-bar-msg{font-size:12px;color:#884444}
+#admin-active-badge{display:none;position:fixed;bottom:0;left:0;right:0;background:#1a0a0a;border-top:0.5px solid #553333;padding:.5rem 1.25rem;z-index:200;font-size:12px;color:#cc4444;text-align:center}
+#admin-active-badge button{background:none;border:none;color:#884444;font-size:12px;cursor:pointer;margin-left:.75rem;text-decoration:underline}
+
+footer{padding:2rem 1.5rem;text-align:center;font-size:12px;color:#444;border-top:0.5px solid var(--border);margin-top:1rem;cursor:default;user-select:none}
 @media(max-width:639px){.nav-links-desktop{display:none}.hamburger{display:flex;align-items:center;justify-content:center}}
 </style>
 </head>
@@ -80,9 +94,7 @@ footer{padding:2rem 1.5rem;text-align:center;font-size:12px;color:#444;border-to
 
 <div id="setup-banner">
   ⚠️ <strong>Firebase not configured yet.</strong>
-  Reviews won't save until you open the HTML file and replace the placeholder values inside
-  <code>firebaseConfig</code> with your own Firebase project details.
-  See the comments in the &lt;script&gt; at the bottom of the file for instructions.
+  Replace the placeholder values inside <code>firebaseConfig</code> with your own project details.
 </div>
 
 <nav>
@@ -148,13 +160,11 @@ footer{padding:2rem 1.5rem;text-align:center;font-size:12px;color:#444;border-to
   <div class="section-title">Small Addons <span class="section-badge">0 packs</span></div>
   <div class="addons-grid"></div>
 </section>
-
 <hr class="divider">
 <section id="big-textures">
   <div class="section-title">Big Texture Packs <span class="section-badge">0 packs</span></div>
   <div style="display:flex;flex-direction:column;gap:10px"></div>
 </section>
-
 <hr class="divider">
 <section id="small-textures">
   <div class="section-title">Small Texture Packs <span class="section-badge">0 packs</span></div>
@@ -186,21 +196,30 @@ footer{padding:2rem 1.5rem;text-align:center;font-size:12px;color:#444;border-to
     </div>
     <button class="submit-btn" id="submit-btn" onclick="submitReview()">Post Review</button>
     <div class="success-msg" id="success-msg">✓ Your review has been posted. Thanks!</div>
-    <div class="notice" id="already-msg" style="display:none">You have already left a review. Only one review per person is allowed.</div>
+    <div class="cooldown-msg" id="cooldown-msg"></div>
   </div>
   <div class="reviews-list" id="reviews-list">
     <div class="loading-msg">Loading reviews...</div>
   </div>
 </section>
 
-<footer>Q's FREE Addons — All content is free forever</footer>
+<footer id="footer">Q's FREE Addons — All content is free forever</footer>
 
-<!-- Firebase SDKs -->
+<!-- Admin password bar (hidden until footer tapped 5x) -->
+<div id="admin-bar">
+  <input id="admin-pw" type="password" placeholder="Admin password…" onkeydown="if(event.key==='Enter')checkAdminPw()">
+  <button id="admin-pw-btn" onclick="checkAdminPw()">Unlock</button>
+  <span id="admin-bar-msg"></span>
+</div>
+<div id="admin-active-badge">
+  🔴 Admin mode active — delete buttons are visible
+  <button onclick="exitAdmin()">Exit admin</button>
+</div>
+
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-database-compat.js"></script>
-
 <script>
-
+// ── Firebase config — replace with your own values ──────────────
 const firebaseConfig = {
   apiKey: "AIzaSyAe97iOIwvPSXq3tZqXDNPJCdP5cxuwORo",
   authDomain: "q-addons.firebaseapp.com",
@@ -212,31 +231,49 @@ const firebaseConfig = {
   measurementId: "G-5Y8SB4HEQ3"
 };
 
+
+// ── Admin password — change this to whatever you want ───────────
+const ADMIN_PASSWORD = "changeme123";
+
+// ── Cooldown duration ───────────────────────────────────────────
+const COOLDOWN_MS = 60 * 60 * 1000; // 1 hour
+
 const IS_CONFIGURED = firebaseConfig.apiKey !== "PASTE_YOUR_API_KEY_HERE";
+let reviewsRef = null;
 
 if (!IS_CONFIGURED) {
   document.getElementById('setup-banner').style.display = 'block';
-  document.getElementById('reviews-list').innerHTML =
-    '<div class="loading-msg">Firebase not set up yet — reviews are disabled.</div>';
+  document.getElementById('reviews-list').innerHTML = '<div class="loading-msg">Firebase not set up yet — reviews are disabled.</div>';
 } else {
   firebase.initializeApp(firebaseConfig);
   const db = firebase.database();
-  const reviewsRef = db.ref('reviews');
+  reviewsRef = db.ref('reviews');
 
-  // Real-time listener — updates on ALL devices instantly
   reviewsRef.orderByChild('timestamp').on('value', (snapshot) => {
     const data = snapshot.val();
-    const reviews = data ? Object.values(data).reverse() : [];
+    // Keep the Firebase key (_key) so we can delete by it
+    const reviews = data
+      ? Object.entries(data).map(([k, v]) => ({...v, _key: k})).reverse()
+      : [];
     renderReviews(reviews);
   });
+}
 
-  window._submitToFirebase = function(name, stars, text) {
-    reviewsRef.push({
-      name, stars, text,
-      date: new Date().toLocaleDateString('en-US',{year:'numeric',month:'short',day:'numeric'}),
-      timestamp: Date.now()
-    });
-  };
+// ── Cooldown helpers ────────────────────────────────────────────
+function getCooldownMs() {
+  try {
+    const stored = localStorage.getItem('q_cooldown');
+    if (!stored) return 0;
+    const elapsed = Date.now() - parseInt(stored, 10);
+    return Math.max(0, COOLDOWN_MS - elapsed);
+  } catch { return 0; }
+}
+
+function formatTime(ms) {
+  const m = Math.floor(ms / 60000);
+  const s = Math.floor((ms % 60000) / 1000);
+  if (m > 0) return `${m} min ${s} sec`;
+  return `${s} sec`;
 }
 
 // ── UI helpers ──────────────────────────────────────────────────
@@ -277,9 +314,8 @@ function updateActiveNav(target) {
 
 function scrollToSection(e, id) {
   e.preventDefault();
-  const section = document.getElementById(id);
-  if (!section) return;
-  section.scrollIntoView({behavior:'smooth', block:'start'});
+  const el = document.getElementById(id);
+  if (el) el.scrollIntoView({behavior:'smooth', block:'start'});
   updateActiveNav(id);
 }
 
@@ -288,14 +324,11 @@ function downloadFiles(urls) {
     const a = document.createElement('a');
     a.href = encodeURI(url);
     a.download = url.split('/').pop();
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
   });
 }
 
 const sectionIds = ['home','big-addons','small-addons','big-textures','small-textures','reviews'];
-
 function onScrollUpdateActive() {
   const offset = window.innerHeight * 0.22;
   let current = 'home';
@@ -305,10 +338,8 @@ function onScrollUpdateActive() {
   });
   updateActiveNav(current);
 }
-
 window.addEventListener('scroll', onScrollUpdateActive);
 window.addEventListener('load', onScrollUpdateActive);
-
 document.addEventListener('click', e => {
   if (menuOpen && !e.target.closest('#mobile-menu') && !e.target.closest('#hamburger-btn')) closeMenu();
 });
@@ -327,6 +358,7 @@ function renderReviews(reviews) {
   }
   list.innerHTML = reviews.map(r => `
     <div class="review-item">
+      <button class="delete-btn" onclick="deleteReview('${esc(r._key)}', this)" title="Delete review">✕ Delete</button>
       <div class="review-header">
         <span class="review-author">${esc(r.name)}</span>
         <span class="review-stars">${'★'.repeat(r.stars)}${'☆'.repeat(5 - r.stars)}</span>
@@ -337,29 +369,82 @@ function renderReviews(reviews) {
   `).join('');
 }
 
-function getStoredKey(name) {
-  return 'q_reviewed_' + name.trim().toLowerCase().replace(/\s+/g,'_');
-}
-
 function submitReview() {
   if (!IS_CONFIGURED) return;
   const name = document.getElementById('r-name').value.trim();
   const text = document.getElementById('r-text').value.trim();
   const succ = document.getElementById('success-msg');
-  const already = document.getElementById('already-msg');
+  const cdMsg = document.getElementById('cooldown-msg');
   succ.style.display = 'none';
-  already.style.display = 'none';
+  cdMsg.style.display = 'none';
+
   if (!name) { document.getElementById('r-name').focus(); return; }
   if (!selectedStar) return;
   if (!text) { document.getElementById('r-text').focus(); return; }
-  const key = getStoredKey(name);
-  if (localStorage.getItem(key)) { already.style.display = 'block'; return; }
-  window._submitToFirebase(name, selectedStar, text);
-  localStorage.setItem(key, '1');
+
+  // Check cooldown
+  const remaining = getCooldownMs();
+  if (remaining > 0) {
+    cdMsg.textContent = `⏳ You're posting too fast — try again in ${formatTime(remaining)}.`;
+    cdMsg.style.display = 'block';
+    return;
+  }
+
+  reviewsRef.push({
+    name, stars: selectedStar, text,
+    date: new Date().toLocaleDateString('en-US', {year:'numeric', month:'short', day:'numeric'}),
+    timestamp: Date.now()
+  });
+
+  // Set cooldown timestamp
+  localStorage.setItem('q_cooldown', String(Date.now()));
+
   document.getElementById('r-name').value = '';
   document.getElementById('r-text').value = '';
   setStar(0); selectedStar = 0;
   succ.style.display = 'block';
+}
+
+// ── Admin mode ──────────────────────────────────────────────────
+let footerTaps = 0;
+let footerTimer = null;
+
+document.getElementById('footer').addEventListener('click', () => {
+  footerTaps++;
+  clearTimeout(footerTimer);
+  footerTimer = setTimeout(() => footerTaps = 0, 2000);
+  if (footerTaps >= 5) {
+    footerTaps = 0;
+    document.getElementById('admin-bar').classList.add('open');
+    document.getElementById('admin-pw').focus();
+  }
+});
+
+function checkAdminPw() {
+  const pw = document.getElementById('admin-pw').value;
+  const msg = document.getElementById('admin-bar-msg');
+  if (pw === ADMIN_PASSWORD) {
+    document.getElementById('admin-bar').classList.remove('open');
+    document.getElementById('admin-pw').value = '';
+    document.body.classList.add('admin-mode');
+    document.getElementById('admin-active-badge').style.display = 'block';
+    msg.textContent = '';
+  } else {
+    msg.textContent = 'Wrong password';
+    document.getElementById('admin-pw').value = '';
+    document.getElementById('admin-pw').focus();
+  }
+}
+
+function exitAdmin() {
+  document.body.classList.remove('admin-mode');
+  document.getElementById('admin-active-badge').style.display = 'none';
+}
+
+function deleteReview(key, btn) {
+  if (!reviewsRef) return;
+  if (!confirm('Delete this review?')) return;
+  reviewsRef.child(key).remove();
 }
 </script>
 </body>
