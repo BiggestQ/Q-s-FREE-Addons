@@ -151,11 +151,11 @@ footer{padding:2rem 1.5rem;text-align:center;font-size:12px;color:#444;border-to
       </div>
     </div>
     <div class="ideas-panel">
-      <div class="ideas-panel-title">Todo list</div>
+      <div class="ideas-panel-title">Ideas</div>
       <ul>
-        <li>Coinflip system</li>
-        <li>Full Texture pack</li>
-        <li>???</li>
+        <li>Your idea here</li>
+        <li>Your idea here</li>
+        <li>Your idea here</li>
       </ul>
     </div>
   </div>
@@ -296,10 +296,16 @@ function getCooldownMs() {
 }
 
 function formatTime(ms) {
-  const m = Math.floor(ms / 60000);
+  const d = Math.floor(ms / 86400000);
+  const h = Math.floor((ms % 86400000) / 3600000);
+  const m = Math.floor((ms % 3600000) / 60000);
   const s = Math.floor((ms % 60000) / 1000);
-  if (m > 0) return m + ' min ' + s + ' sec';
-  return s + ' sec';
+  const parts = [];
+  if (d > 0) parts.push(d + ' day' + (d !== 1 ? 's' : ''));
+  if (h > 0) parts.push(h + ' hr');
+  if (m > 0) parts.push(m + ' min');
+  if (s > 0 || parts.length === 0) parts.push(s + ' sec');
+  return parts.join(' ');
 }
 
 let selectedStar = 0;
